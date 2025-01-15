@@ -1,0 +1,6 @@
+CREATE TABLE salones (
+    idSalon INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL UNIQUE,
+    capacidad INTEGER NOT NULL,
+    ubicacion TEXT NOT NULL
+);
