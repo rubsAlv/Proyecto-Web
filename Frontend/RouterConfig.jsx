@@ -23,7 +23,7 @@ const routes = [
     ),
   },
   {
-    path: '/Materias', // Nueva ruta para materias
+    path: '/Materias', 
     component: (
       <>
         <Materias />
