@@ -1,2 +1,3 @@
 # Proyecto-Web
 Este es el proyecto final de la materia Tecnologías de desarrollo web. 
+Se tienen que modificar las rutas .env para que funcione....
