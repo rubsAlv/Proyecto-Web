@@ -4,14 +4,14 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { PenTool} from "lucide-react";
 
-// aqui va la url de la api dani, yo uso el puerto 5000 pero si tienes broncas se puede cambiar 
-const API_URL = "http://127.0.0.1:5000/carreras"; // asegurate que corra bien este es muy importante
+
+const API_URL = "http://127.0.0.1:5000/carreras";
 
 const AppCarreras = () => {
   const [carreras, setCarreras] = useState([]);
-  const [error, setError] = useState(null); // para manejar errores
-  const [showCarreraForm, setShowCarreraForm] = useState(false); // muestra o oculta el formulario
-  const [selectedCarrera, setSelectedCarrera] = useState(null); // guarda la carrera seleccionada para editar
+  const [error, setError] = useState(null);
+  const [showCarreraForm, setShowCarreraForm] = useState(false); 
+  const [selectedCarrera, setSelectedCarrera] = useState(null); 
 
   const [newCarrera, setNewCarrera] = useState({
     carrera: "",
@@ -20,11 +20,11 @@ const AppCarreras = () => {
     plan: "",
   });
 
-  // obtiene las carreras desde la api
+  
   const fetchCarreras = async () => {
     try {
       const response = await axios.get(API_URL);
-      setCarreras(response.data); // guarda las carreras
+      setCarreras(response.data); 
     } catch (err) {
       setError("error al cargar las carreras");
     }
@@ -34,38 +34,37 @@ const AppCarreras = () => {
     fetchCarreras();
   }, []);
 
-  // guarda o actualiza una carrera
+  /
   const handleSaveCarrera = async () => {
     try {
       if (selectedCarrera) {
-        // actualiza la carrera si esta seleccionada
+       
         await axios.put(`${API_URL}/${selectedCarrera.idCarrera}`, newCarrera);
       } else {
-        // crea una nueva carrera si no hay seleccionada
+       
         await axios.post(API_URL, newCarrera);
       }
-      fetchCarreras(); // refresca la lista de carreraa
-      setShowCarreraForm(false); // cierra el formulario
-      setSelectedCarrera(null); // limpia la seleccion
-      setNewCarrera({ carrera: "", descripcionCarrera: "", semestres: "", plan: "" }); // limpia el formulario
-    } catch (err) {
+      fetchCarreras(); 
+      setShowCarreraForm(false); 
+      setSelectedCarrera(null); 
+      setNewCarrera({ carrera: "", descripcionCarrera: "", semestres: "", plan: "" }); 
       setError("error al guardar la carreraa");
     }
   };
 
-  // elimina una carrera por su id
+  
   const handleDeleteCarrera = async (idCarrera) => {
     try {
       await axios.delete(`${API_URL}/${idCarrera}`);
-      fetchCarreras(); // refresca la lista
+      fetchCarreras(); 
     } catch (err) {
       setError("erro al eliminar la carrera");
     }
   };
 
-  // carga los datos de una carrera en el formulario para editar
+  
   const handleEditCarrera = (carrera) => {
-    setSelectedCarrera(carrera); // selecciona la carrera para editar
+    setSelectedCarrera(carrera);
     setNewCarrera({
       carrera: carrera.carrera,
       descripcionCarrera: carrera.descripcionCarrera,
